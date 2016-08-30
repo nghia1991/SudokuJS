@@ -4,10 +4,14 @@ var sudokujs = {
 
     solve: function(matrixArrayOrigin, done, fail) {
         var numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-        this.sudoRecur(matrixArrayOrigin, numberArray, 0, done, fail);
+        if (!this.verify(matrixArrayOrigin)) {
+            fail();
+        } else {
+            this.sudoRecur(matrixArrayOrigin, numberArray, 0, done);
+        }
     },
 
-    sudoRecur: function(matrixArray, numberArray, position, done, fail) {
+    sudoRecur: function(matrixArray, numberArray, position, done) {
         
         if (!this.isSolved) {
             if (position == 81) {
@@ -18,12 +22,12 @@ var sudokujs = {
                     for (var i = 0; i < 9; i++) {
                         if (this.checkAll(matrixArray, position, numberArray[i])) {
                             matrixArray[position] = numberArray[i];
-                            this.sudoRecur(matrixArray, numberArray, position + 1, done, fail);
+                            this.sudoRecur(matrixArray, numberArray, position + 1, done);
                         } 
                     }
                     matrixArray[position] = 0;
                 } else {
-                    this.sudoRecur(matrixArray, numberArray, position + 1, done, fail);
+                    this.sudoRecur(matrixArray, numberArray, position + 1, done);
                 }
             }
         }
@@ -32,30 +36,33 @@ var sudokujs = {
 
     // position: 0 -> 80
 
-    checkRow: function(matrixArray, row, number) {
+    checkRow: function(matrixArray, row, number, position) {
         // row: from 0 to 8
         
         var from = row * 9;
         var to = from + 8;
 
         for (var i = from; i <= to; i++) {
+            if (i == position) continue;
             if (matrixArray[i] == number) return false;
         }
 
         return true;
     },
 
-    checkColumn: function(matrixArray, column, number) {
+    checkColumn: function(matrixArray, column, number, position) {
         // column: from 0 to 8
     
         for (var i = 0; i < 9; i++) {
-            if (matrixArray[column + (i * 9)] == number) return false;
+            var k = column + (i * 9);
+            if (k == position) continue;
+            if (matrixArray[k] == number) return false;
         }
 
         return true;
     },
 
-    checkZone: function(matrixArray, row, column, number){
+    checkZone: function(matrixArray, row, column, number, position){
         // zone: from 0 to 8
 
         var from = 0;
@@ -89,7 +96,9 @@ var sudokujs = {
 
         for(var i = 0; i < 3; i++){
             for (var j = from, to = from + 2; j <= to; j++) {
-                if (matrixArray[j + (i * 9)] == number) return false;
+                var k = j + (i * 9);
+                if (k == position) continue;
+                if (matrixArray[k] == number) return false;
             }
         }
         
@@ -101,7 +110,16 @@ var sudokujs = {
         var row = Math.floor(position / 9);
         var column = position % 9;
 
-        return this.checkRow(matrixArray, row, number) && this.checkColumn(matrixArray, column, number) && this.checkZone(matrixArray, row, column, number);
+        return this.checkRow(matrixArray, row, number, position) && this.checkColumn(matrixArray, column, number, position) && this.checkZone(matrixArray, row, column, number, position);
     },
+
+    verify: function(matrixArrayOrigin) {
+        for (var i = 0; i < 81; i++) {
+            if (matrixArrayOrigin[i] != 0) {
+                if (!this.checkAll(matrixArrayOrigin, i, matrixArrayOrigin[i])) return false;
+            }
+        }
+        return true;
+    }
 
 }
