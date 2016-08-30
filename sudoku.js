@@ -3,16 +3,19 @@ var sudokujs = {
     isSolved : false,
 
     solve: function(matrixArrayOrigin, done, fail) {
-        var numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        var numberArray = this.disorderArray([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
         if (!this.verify(matrixArrayOrigin)) {
             fail();
         } else {
+            this.isSolved = false;
             this.sudoRecur(matrixArrayOrigin, numberArray, 0, done);
         }
     },
 
     sudoRecur: function(matrixArray, numberArray, position, done) {
-        
+        var _numberArray = numberArray;
+
         if (!this.isSolved) {
             if (position == 81) {
                 this.isSolved = true;
@@ -120,6 +123,34 @@ var sudokujs = {
             }
         }
         return true;
+    },
+
+    generate: function(done) {
+        var matrixArrayOrigin = [];
+        for (var i = 0; i < 81; i++) {
+            matrixArrayOrigin.push(0);
+        }
+
+        var numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+        numberArray = this.disorderArray(numberArray);
+        numberArray = this.disorderArray(numberArray);
+        numberArray = this.disorderArray(numberArray);
+
+        this.sudoRecur(matrixArrayOrigin, numberArray, 0, done);
+    },
+
+    disorderArray: function(numberArray) {
+
+        var result = [];
+
+        while(numberArray.length > 0) {
+            var position = Math.floor((Math.random() * numberArray.length)); // random number between 0 and numberArray.length
+            result.push(numberArray[position]);
+            numberArray.splice(position, 1);
+        }
+
+        return result;
     }
 
 }
