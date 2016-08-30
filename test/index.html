@@ -2,13 +2,31 @@
 <html>
 
     <head>
-        <script src="../sudoku.js"></script>
-        <script src="test.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
 
-    <body>
+    <body onkeypress="keyPressed(event)">
 
+        <table id="sudoku-table">
+            <caption>SudokuJS Demo</caption>
+            <colgroup><col><col><col>
+            <colgroup><col><col><col>
+            <colgroup><col><col><col>
+
+        </table>
+
+
+        <div class="btn-group">
+            <button id="random-btn" onclick="randomBtnClicked()">Random Sudoku</button>
+            <button id="solve-btn" onclick="solveBtnClicked()">Solve</button>
+            <button id="reset-btn" onclick="resetBtnClicked()">Reset</button>
+        </div>
+
+        <script src="../sudoku.js"></script>
+        <script src="test.js"></script>
 
     </body>
+
+
 </html>
 

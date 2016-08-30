@@ -137,6 +137,8 @@ var sudokujs = {
         numberArray = this.disorderArray(numberArray);
         numberArray = this.disorderArray(numberArray);
 
+        this.isSolved = false;
+        
         this.sudoRecur(matrixArrayOrigin, numberArray, 0, done);
     },
 
