@@ -9,7 +9,7 @@ sudokujs is a javascript library to **solve** and **generate random** sudoku puz
 Add the below code into your HTML file
 
 ```HTML
-<script src="../sudoku.js"></script> 
+<script src="sudoku.js"></script> 
 ```
 
 ## Usage

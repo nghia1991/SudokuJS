@@ -7,8 +7,12 @@
 
     <body onkeypress="keyPressed(event)">
 
+        <p>
+            Hover into table cell and press a number key from <b>1</b> to <b>9</b>, press <b>0</b> to clear. Click <b>Solve It</b> button to solve
+        </p>
+
         <table id="sudoku-table">
-            <caption>SudokuJS Demo</caption>
+            <caption><a href="https://github.com/nghiatrx/sudokujs">View source code</a></caption>
             <colgroup><col><col><col>
             <colgroup><col><col><col>
             <colgroup><col><col><col>
@@ -22,6 +26,7 @@
             <button id="reset-btn" onclick="resetBtnClicked()">Reset</button>
         </div>
 
+    
         <script src="../sudoku.js"></script>
         <script src="test.js"></script>
 
