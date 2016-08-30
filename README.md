@@ -2,7 +2,7 @@
 
 sudokujs is a javascript library to **solve** and **generate random** sudoku puzzle
 
-[link text itself]: https://nghiatrx.github.io/test/
+[Demo online](https://nghiatrx.github.io/test)
 
 ## Installation
 
