@@ -16,7 +16,7 @@ Add the below code into your HTML file
 
 ### Solve
 
-![alt text](../test/sudoku.jpg "")
+![alt text](/test/sudoku.jpg "")
 
 You must convert to array, example: 
 
@@ -42,7 +42,9 @@ result = [9, 8, 7, 6, 5, 4, 3, 2, 1, 2, 4, 6, 1, 7, 3, 9, 8, 5, 3, 5, 1, 9, 2, 8
 
 ### Generate random sudoku puzzle
 
+```javascript
 sudokujs.generate(function(result) {
     console.log(result);
 });
+```
 
